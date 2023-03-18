@@ -1,58 +1,52 @@
 package com.maksimrudek;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
+import java.nio.charset.StandardCharsets;
 
 public class Main {
-    private static final String API_KEY = "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";
 
-    public static void main(String[] args) throws IOException {
-        String prompt = "Enter your prompt here.";
+    public static void main(String[] args) {
+        String prompt = "Hi, how are you doing today?";
+        String response = getAnswer(prompt);
+        System.out.println(response);
+    }
 
-        URL url = new URL("https://api.openai.com/v1/engines/davinci-codex/completions");
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestMethod("POST");
-        conn.setRequestProperty("Content-Type", "application/json");
-        conn.setRequestProperty("Authorization", "Bearer " + API_KEY);
-        conn.setDoOutput(true);
+    public static String getAnswer(String prompt) {
+        try {
+            URL url = new URL("https://api.openai.com/v1/engines/text-davinci-003/completions");
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Content-Type", "application/json");
+            connection.setRequestProperty("Authorization", "Bearer " + "");
+            connection.setDoOutput(true);
 
-        String json = "{\"prompt\": \"" + prompt + "\", \"max_tokens\": 100}";
-        OutputStream os = conn.getOutputStream();
-        os.write(json.getBytes());
-        os.flush();
+            String body = "{\"prompt\": \"" + prompt + "\", \"max_tokens\": 150, \"temperature\": 0.7}";
 
-        InputStream is = conn.getInputStream();
-        byte[] buffer = new byte[1024];
-        int bytesRead;
-        StringBuilder responseBuilder = new StringBuilder();
+            OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream(), StandardCharsets.UTF_8);
+            writer.write(body);
+            writer.flush();
 
-        while ((bytesRead = is.read(buffer)) != -1) {
-            responseBuilder.append(new String(buffer, 0, bytesRead));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8));
+            StringBuilder response = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                response.append(line);
+            }
+            reader.close();
+
+            int startIndex = response.indexOf("\"text\": \"") + 9;
+            int endIndex = response.indexOf("\"", startIndex);
+            String answer = response.substring(startIndex, endIndex);
+
+            return answer;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "Error: " + e.getMessage();
         }
-
-        String response = responseBuilder.toString();
-        List<String> textList = new ArrayList<String>();
-
-        int startIndex = response.indexOf("\"text\": \"") + 9;
-        int endIndex = response.indexOf("\"", startIndex);
-
-        while (startIndex > 8 && endIndex > startIndex) {
-            String text = response.substring(startIndex, endIndex);
-            textList.add(text);
-
-            startIndex = response.indexOf("\"text\": \"", endIndex) + 9;
-            endIndex = response.indexOf("\"", startIndex);
-        }
-
-        String responseText = String.join("", textList);
-        System.out.println(responseText);
     }
 }
-
-
-//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
