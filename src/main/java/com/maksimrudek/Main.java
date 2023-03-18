@@ -1,46 +1,58 @@
 package com.maksimrudek;
 
 import java.io.IOException;
-import okhttp3.*;
-import com.google.gson.*;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
-
     private static final String API_KEY = "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";
-    private static final String API_URL = "https://api.openai.com/v1/engines/davinci-codex/completions";
-
-    private static final OkHttpClient client = new OkHttpClient();
-
-    private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     public static void main(String[] args) throws IOException {
-        String prompt = "Hello, how are you?";
-        int maxTokens = 50;
-        double temperature = 0.7;
-        String response = generateText(prompt, maxTokens, temperature);
-        System.out.println(response);
-    }
+        String prompt = "Enter your prompt here.";
 
-    private static String generateText(String prompt, int maxTokens, double temperature) throws IOException {
-        JsonObject requestBody = new JsonObject();
-        requestBody.addProperty("prompt", prompt);
-        requestBody.addProperty("max_tokens", maxTokens);
-        requestBody.addProperty("temperature", temperature);
+        URL url = new URL("https://api.openai.com/v1/engines/davinci-codex/completions");
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("POST");
+        conn.setRequestProperty("Content-Type", "application/json");
+        conn.setRequestProperty("Authorization", "Bearer " + API_KEY);
+        conn.setDoOutput(true);
 
-        Request request = new Request.Builder()
-                .url(API_URL)
-                .post(RequestBody.create(MediaType.parse("application/json"), gson.toJson(requestBody)))
-                .addHeader("Authorization", "Bearer " + API_KEY)
-                .build();
+        String json = "{\"prompt\": \"" + prompt + "\", \"max_tokens\": 100}";
+        OutputStream os = conn.getOutputStream();
+        os.write(json.getBytes());
+        os.flush();
 
-        Response response = client.newCall(request).execute();
-        String responseBody = response.body().string();
+        InputStream is = conn.getInputStream();
+        byte[] buffer = new byte[1024];
+        int bytesRead;
+        StringBuilder responseBuilder = new StringBuilder();
 
-        JsonObject json = JsonParser.parseString(responseBody).getAsJsonObject();
-        JsonArray choices = json.getAsJsonArray("choices");
-        JsonObject firstChoice = choices.get(0).getAsJsonObject();
-        String text = firstChoice.get("text").getAsString();
+        while ((bytesRead = is.read(buffer)) != -1) {
+            responseBuilder.append(new String(buffer, 0, bytesRead));
+        }
 
-        return text;
+        String response = responseBuilder.toString();
+        List<String> textList = new ArrayList<String>();
+
+        int startIndex = response.indexOf("\"text\": \"") + 9;
+        int endIndex = response.indexOf("\"", startIndex);
+
+        while (startIndex > 8 && endIndex > startIndex) {
+            String text = response.substring(startIndex, endIndex);
+            textList.add(text);
+
+            startIndex = response.indexOf("\"text\": \"", endIndex) + 9;
+            endIndex = response.indexOf("\"", startIndex);
+        }
+
+        String responseText = String.join("", textList);
+        System.out.println(responseText);
     }
 }
+
+
+//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
