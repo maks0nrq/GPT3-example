@@ -1,4 +1,4 @@
-GPT-3 API Example in Java
+### GPT-3 API Example in Java
 This is a simple example of how to use the GPT-3 API in Java to generate text.
 
 Prerequisites
