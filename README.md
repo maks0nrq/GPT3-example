@@ -15,7 +15,7 @@ Replace the <your-engine-id> placeholder with your GPT-3 engine ID.
 Modify the prompt and maxTokens variables to suit your needs.
 The prompt variable is a string that represents the text prompt to use when generating the text.
 The maxTokens variable is an integer that represents the maximum number of tokens to generate in the response.
-Run the main method in the Gpt3Example class.
+Run the main method in the Main class.
 The generated text should be printed to the console.
 Troubleshooting
 If you encounter any issues while using this example, here are a few things to check:
