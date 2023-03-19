@@ -7,7 +7,7 @@ To use this example, you will need:
 A GPT-3 API key. You can get one by signing up for the GPT-3 beta program.
 A GPT-3 engine ID. You can create one by going to the API dashboard and following the instructions.
 ### Usage
-# To use this example:
+#### To use this example:
 
 Open the Gpt3Example.java file in your preferred Java IDE.
 Replace the <your-api-key> placeholder with your GPT-3 API key.
@@ -17,7 +17,7 @@ The prompt variable is a string that represents the text prompt to use when gene
 The maxTokens variable is an integer that represents the maximum number of tokens to generate in the response.
 Run the main method in the Main class.
 The generated text should be printed to the console.
-Troubleshooting
+### Troubleshooting
 If you encounter any issues while using this example, here are a few things to check:
 
 Make sure that you have replaced the <your-api-key> and <your-engine-id> placeholders with your actual API key and engine ID.
