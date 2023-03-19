@@ -7,7 +7,7 @@ To use this example, you will need:
 A GPT-3 API key. You can get one by signing up for the GPT-3 beta program.
 A GPT-3 engine ID. You can create one by going to the API dashboard and following the instructions.
 ## Usage
-## To use this example:
+To use this example:
 
 1. Open the Main.java file in your preferred Java IDE.
 2. Replace the <your-api-key> placeholder with your GPT-3 API key.
