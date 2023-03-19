@@ -1,12 +1,12 @@
 # GPT-3 API Example in Java
 This is a simple example of how to use the GPT-3 API in Java to generate text.
 
-## Prerequisites
+### Prerequisites
 To use this example, you will need:
 
 A GPT-3 API key. You can get one by signing up for the GPT-3 beta program.
 A GPT-3 engine ID. You can create one by going to the API dashboard and following the instructions.
-## Usage
+### Usage
 To use this example:
 
 1. Open the Main.java file in your preferred Java IDE.
@@ -18,7 +18,7 @@ To use this example:
 5. Run the main method in the Main class.
 6. The generated text should be printed to the console.
   
-## Troubleshooting
+### Troubleshooting
   
 If you encounter any issues while using this example, here are a few things to check:
 
@@ -29,5 +29,5 @@ If you encounter any issues while using this example, here are a few things to c
 - Make sure that your internet connection is working properly.
 - If you continue to experience issues, please refer to the GPT-3 API documentation or contact OpenAI support for further assistance.
 
-## License
+### License
 This example code is licensed under the MIT license. See the LICENSE file for details.
