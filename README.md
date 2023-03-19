@@ -4,14 +4,14 @@ This is a simple example of how to use the GPT-3 API in Java to generate text.
 ### Prerequisites
 To use this example, you will need:
 
-A GPT-3 API key. You can get one by signing up for the GPT-3 beta program.
-A GPT-3 engine ID. You can create one by going to the API dashboard and following the instructions.
+A GPT-3 API key. You can get one by signing up for the [GPT-3 beta program](https://beta.openai.com/signup/).
+A GPT-3 engine ID. You can create one by going to the [API dashboard](https://beta.openai.com/docs/api-reference/introduction) and following the instructions.
 ### Usage
 To use this example:
 
 1. Open the Main.java file in your preferred Java IDE.
-2. Replace the <your-api-key> placeholder with your GPT-3 API key.
-3. Replace the <your-engine-id> placeholder with your GPT-3 engine ID.
+2. Replace the `<your-api-key>` placeholder with your GPT-3 API key.
+3. Replace the `<your-engine-id>` placeholder with your GPT-3 engine ID.
 4. Modify the prompt and maxTokens variables to suit your needs.
   - The prompt variable is a string that represents the text prompt to use when generating the text.
   - The maxTokens variable is an integer that represents the maximum number of tokens to generate in the response.
@@ -27,7 +27,7 @@ If you encounter any issues while using this example, here are a few things to c
 - Make sure that your API key has permission to access the GPT-3 API.
 - Make sure that your API key has not expired.
 - Make sure that your internet connection is working properly.
-- If you continue to experience issues, please refer to the GPT-3 API documentation or contact OpenAI support for further assistance.
+- If you continue to experience issues, please refer to the [GPT-3 API documentation](https://beta.openai.com/docs/api-reference/introduction) or contact OpenAI support for further assistance.
 
 ### License
 This example code is licensed under the MIT license. See the LICENSE file for details.
