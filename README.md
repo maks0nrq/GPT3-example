@@ -28,6 +28,3 @@ If you encounter any issues while using this example, here are a few things to c
 - Make sure that your API key has not expired.
 - Make sure that your internet connection is working properly.
 - If you continue to experience issues, please refer to the [GPT-3 API documentation](https://beta.openai.com/docs/api-reference/introduction) or contact OpenAI support for further assistance.
-
-### License
-This example code is licensed under the MIT license. See the LICENSE file for details.
